@@ -1,0 +1,5 @@
+{% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id %}
+{% assign klass                 = "stock_messages" %}
+{% assign documents             = stock_messages_query.results %}
+
+{% include "shared/tools" %}

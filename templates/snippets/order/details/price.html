@@ -1,0 +1,3 @@
+{% if order.price != nil %}
+  {{ order.price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }}
+{% endif %}

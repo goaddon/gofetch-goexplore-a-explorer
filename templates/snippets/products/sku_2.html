@@ -1,0 +1,3 @@
+{% if product.sku_2 != nil and product.sku_2 != "" %}
+  {{ product.sku_2 | decrypt | strip_html }}
+{% endif %}

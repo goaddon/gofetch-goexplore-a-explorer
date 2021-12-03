@@ -1,0 +1,12 @@
+<h5 class="mb-4">{{ l.headlines[klass] }}</h5>
+{% capture document_path %}{{ klass }}__show{% endcapture %}
+{% for document in documents %}
+  <p>
+    <a href="{{ document_path | path_for: id: document._id }}">
+      {{ document.name }}
+      {% if document.remote_id != nil %}
+        &nbsp;({{ document.remote_id | strip_html }})
+      {% endif %}
+    </a>
+  </p>
+{% endfor %}

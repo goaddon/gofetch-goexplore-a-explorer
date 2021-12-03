@@ -1,0 +1,155 @@
+<table class="table mb-4">
+  <tbody>
+    {% if document.variations != nil and document.variations.size > 0 %}
+      <tr>
+        <td class="pe-3">
+          <b>{{ l.headers.variations }}:</b>
+        </td>
+        <td>
+          {% for variation in document.variations %}
+            &nbsp;<span class="border rounded text-nowrap px-1 border-secondary me-1">{{ variations }}{{ variation.type | decrypt | strip_html }}: {{ variation.value | decrypt | strip_html }}</span>
+          {% endfor %}
+        </td>
+      </tr>
+    {% endif %}
+
+    {% assign fields = "sku sku_2 sku_3 name meta_title meta_description manufactorer template path campaign" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ document[field] | decrypt | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "price offer_price before_price" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ document[field] | round: 2 | replace: ".", l.price_delimiter }} {{ document.currency | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "manage_stock allow_backorders published searchable" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% if document[field] %}
+              {{ l.bools.yes }}
+            {% else %}
+              {{ l.bools.no }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "campaign_started_at campaign_finished_at offer_started_at offer_finished_at updated_at" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ document[field] | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "_id" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ document[field] | generation_time | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "type low_stock_limit weight length height unboxed_weight unboxed_length unboxed_width unboxed_height weight_unit size_unit published_scope status" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ document[field] | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "tags" | split: " " %}
+
+    {% for field in fields %}
+      {% if document[field] != nil and document[field].size > 0 %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% for item in document[field] %}
+              <span class="border rounded text-nowrap px-1 border-secondary me-1">{{ item | decrypt | strip_html }}</span>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% if session.controller == "variants" %}
+
+      {% assign fields = "barcode" | split: " " %}
+
+      {% for field in fields %}
+        {% if document[field] != nil %}
+          <tr>
+            <td class="pe-3">
+              <b>{{ l.headers[field] }}:</b>
+            </td>
+            <td>
+              {{ document[field] | decrypt | strip_html }}
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+
+{% assign descriptions = "description_1 description_2 description_3" | split: " " %}
+
+{% for description in descriptions %}
+  {% if document[description] != nil and document[description] != "" %}
+    <div class="bg-light mt-4 p-2 border rounded">
+      {{ document[description] | decrypt | escape }}
+    </div>
+  {% endif %}
+{% endfor %}

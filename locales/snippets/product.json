@@ -1,0 +1,11 @@
+{
+  "en": {
+    "headline": "Product",
+    "no_product_name": "without name",
+    "price_delimiter": ",",
+    "variant_headers": {
+      "sku": "Variant SKU",
+      "variations": "Variations"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{% if stocks[counter] == "nil" %}
+  {{ l.unknown_stock }}
+{% else %}
+  {{ stocks[counter] }} {{ l.pcs }}
+{% endif %}

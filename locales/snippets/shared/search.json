@@ -1,0 +1,28 @@
+{
+  "en": {
+    "placeholders": {
+      "products": "Filter products...",
+      "orders": "Filter orders...",
+      "categories": "Filter categories..."
+    },
+    "options": {
+      "products": {
+        "sku": "SKU",
+        "name": "Name",
+        "sku_2": "SKU 2",
+        "sku_3": "SKU 3"
+      },
+      "orders": {
+        "order_number": "ID",
+        "email": "Email"
+      },
+      "categories": {
+        "remote_id": "Remote ID",
+        "name": "Name"
+      }
+    },
+    "buttons": {
+      "search": "Search"
+    }
+  }
+}

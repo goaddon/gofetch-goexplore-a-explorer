@@ -1,0 +1,8 @@
+{% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id, _id: params.id %}
+{% assign stock_message         = stock_messages_query.results.first %}
+
+{% if stock_message != nil %}
+  {% assign webshops_query  = "webshops" | db_find: _id: stock_message.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+  {% include "stock_message" %}
+{% endif %}

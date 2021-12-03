@@ -1,0 +1,5 @@
+{% if category.name == nil or category.name == "" %}
+  -
+{% else %}
+  {{ category.name | decrypt | strip_html }}
+{% endif %}

@@ -1,0 +1,6 @@
+{% capture address_1_field %}{{ address }}address_1{% endcapture %}
+{% if document[address_1_field] != nil and document[address_1_field] != "" %}
+  {{ document[address_1_field] | decrypt | strip_html }}
+{% else %}
+  -
+{% endif %}

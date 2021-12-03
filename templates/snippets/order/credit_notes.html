@@ -1,0 +1,29 @@
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th class="border-bottom-0">{{ l.headers.created_at }}</th>
+      <th class="border-bottom-0">{{ l.headers.remote_id }}</th>
+      <th class="border-bottom-0">{{ l.headers.shipping_amount }}</th>
+      <th class="border-bottom-0">{{ l.headers.payment_amount }}</th>
+      <th class="border-bottom-0">{{ l.headers.amount }}</th>
+      <th class="border-bottom-0">{{ l.headers.refunded_amount }}</th>
+      <th class="border-bottom-0">{{ l.headers.returned_amount }}</th>
+      <th class="border-bottom-0">{{ l.headers.order_lines }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for credit_note in credit_notes %}
+      <tr>
+        <td>{% include "order/credit_notes/created_at" %}</td>
+        <td>{% include "order/credit_notes/remote_id" %}</td>
+        <td>{% include "order/credit_notes/shipping_amount" %}</td>
+        <td>{% include "order/credit_notes/payment_amount" %}</td>
+        <td>{% include "order/credit_notes/amount" %}</td>
+        <td>{% include "order/credit_notes/refunded_amount" %}</td>
+        <td>{% include "order/credit_notes/returned_amount" %}</td>
+        {% assign embedded_order_lines = credit_note.order_lines %}
+        <td>{% include "order/order_lines/embedded_order_lines" %}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

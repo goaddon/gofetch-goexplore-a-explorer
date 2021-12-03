@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Categories"
+  },
+  "paths": [
+    {
+      "controller": "categories",
+      "action": "index"
+    },
+    {
+      "controller": "categories"
+    }
+  ]
+}

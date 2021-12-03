@@ -1,0 +1,14 @@
+{
+  "en": {
+    "headers": {
+      "created_at": "Credit note created",
+      "remote_id": "ID",
+      "shipping_amount": "Shipping",
+      "payment_amount": "Payment",
+      "amount": "Amount",
+      "refunded_amount": "Refunded",
+      "returned_amount": "Returned",
+      "order_lines": "Order lines"
+    }
+  }
+}

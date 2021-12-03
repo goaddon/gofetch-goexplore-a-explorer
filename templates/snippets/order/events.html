@@ -1,0 +1,18 @@
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th class="border-bottom-0">{{ l.headers.created_at }}</th>
+      <th class="border-bottom-0">{{ l.headers.status }}</th>
+      <th class="border-bottom-0">{{ l.headers.comment }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in order.events %}
+      <tr>
+        <td>{% include "order/events/created_at" %}</td>
+        <td>{% include "order/events/status" %}</td>
+        <td>{% include "order/events/comment" %}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

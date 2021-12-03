@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "klass": "variants",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    }
+  },
+  "products": {
+    "klass": "products",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1
+    }
+  },
+  "webshops": {
+    "klass": "webshops",
+    "query": {
+      "_id": "{{ _id }}",
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "relay_id": 1,
+      "no_stock_message_ids": 1
+    }
+  },
+  "order_lines": {
+    "klass": "order_lines",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "variant_id": "{{ variant_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "variant_id": 1,
+      "order_id": 1,
+      "quantity": 1
+    }
+  },
+  "orders": {
+    "klass": "orders",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "created_at": 1,
+      "order_number": 1
+    }
+  },
+  "stock_messages": {
+    "klass": "stock_messages",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1
+    }
+  }
+}

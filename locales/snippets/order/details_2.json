@@ -1,0 +1,38 @@
+{
+  "en": {
+    "link_title": "Additional details",
+    "headers": {
+      "remote_id": "Remote ID",
+      "browser_accept_language": "Browser lang.",
+      "browser_ip": "Browser IP",
+      "browser_session_hash": "Browser session hash",
+      "browser_user_agent": "Browser user agent",
+      "cancellation_reason": "Cancellation reason",
+      "cart_token": "Cart token",
+      "checkout_token": "Checkout token",
+      "browser_height_px": "Browser height (px)",
+      "browser_width_px": "Browser width (px)",
+      "discount_amount": "Discount amount",
+      "landing_page": "Landing page",
+      "language": "Language",
+      "ordering_method": "Ordering method",
+      "processing_location": "Processing location",
+      "processing_method": "Processing method",
+      "reference": "Reference",
+      "referer_page": "Referer page",
+      "vat_pct": "VAT pct",
+      "accepts_marketing": "Accepts marketing",
+      "discount_codes": "Discount codes",
+      "tags": "Tags",
+      "_id": "Created in db",
+      "updated_at": "Updated in db",
+      "closed_at": "Closed in db",
+      "cancelled_at": "Cancelled in db",
+      "refunded_at": "Refunded in db"
+    },
+    "bools": {
+      "yes": "Yes",
+      "no": "No"
+    }
+  }
+}

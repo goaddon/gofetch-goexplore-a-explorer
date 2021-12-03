@@ -1,0 +1,5 @@
+{% if product.name == nil or product.name == "" %}
+  -
+{% else %}
+  {{ product.name | decrypt | strip_html }}
+{% endif %}

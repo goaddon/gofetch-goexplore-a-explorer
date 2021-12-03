@@ -1,0 +1,17 @@
+{% if order_line.variant_id != nil %}
+  {% assign variant = variants[order_line.variant_id] %}
+  {% if variant != nil %}
+    {% include "shared/variant_variations" %}
+    {% if variations == "" %}
+      {% assign variations_text   = l.no_variations %}
+      {% assign variations_title  = nil %}
+    {% elsif variations.size > max_variations_chars %}
+      {% assign variations_text   = variations | truncate: max_variations_chars %}
+      {% assign variations_title  = variations %}
+    {% else %}
+      {% assign variations_text   = variations %}
+      {% assign variations_title  = nil %}
+    {% endif %}
+    <a href="{{ 'variants__show' | path_for: id: variant._id }}" title="{{ variations_title }}">{{ variations_text }}</a>
+  {% endif %}
+{% endif %}

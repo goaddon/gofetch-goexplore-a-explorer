@@ -1,0 +1,14 @@
+{
+  "en": {
+    "headline_1": "Variant",
+    "headline_2": "of",
+    "no_product_name": "without name",
+    "headers": {
+      "event_description": "EVENT",
+      "event_stock": "STOCK",
+      "event_quantity": "ORDERED",
+      "event_stock_message": "STOCK MESSAGE",
+      "event_created_at": "TIME"
+    }
+  }
+}

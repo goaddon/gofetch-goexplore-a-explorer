@@ -1,0 +1,39 @@
+{% assign variants_query   = "variants" | db_find: company_id: account._id, _id: params.id %}
+{% assign document         = variants_query.results.first %}
+
+{% if document != nil %}
+  {% assign products_query        = "products" | db_find: company_id: account._id, _id: document.product_id %}
+  {% assign product               = products_query.results.first %}
+  {% assign webshops_query        = "webshops" | db_find: _id: document.webshop_id, company_id: account._id %}
+  {% assign webshop               = webshops_query.results.first %}
+
+  {% if document.stock_movements != nil %}
+
+    {% assign order_lines_query     = "order_lines" | db_find: company_id: account._id, variant_id: document._id %}
+    {% assign order_lines           = order_lines_query.results %}
+
+    {% assign order_ids = "" %}
+    {% for order_line in order_lines %}
+      {% capture order_ids %}{{ order_ids }} {{ order_line.order_id }}{% endcapture %}
+    {% endfor %}
+    {% assign order_ids             = order_ids | strip | split: " " | uniq %}
+
+    {% assign orders_query          = "orders" | db_find: company_id: account._id, _ids: order_ids %}
+    {% assign orders                = orders_query.results %}
+
+    {% assign order_lines           = order_lines | to_hash: "order_id" %}
+
+    {% assign stock_message_ids = "" %}
+    {% for stock_movement in document.stock_movements %}
+      {% if stock_movement.stock_message_id != nil %}
+        {% capture stock_message_ids %}{{ stock_message_ids }} {{ stock_movement.stock_message_id }}{% endcapture %}
+      {% endif %}
+    {% endfor %}
+    {% assign stock_message_ids     = stock_message_ids | strip | split: " " | uniq %}
+    {% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id, _ids: stock_message_ids %}
+    {% assign stock_messages        = stock_messages_query.results | to_hash: "_id" %}
+  {% endif %}
+
+  {% include "variant" %}
+
+{% endif %}

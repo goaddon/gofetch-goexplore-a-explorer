@@ -1,0 +1,31 @@
+{% capture name_field %}{{ address }}name{% endcapture %}
+{% if document[name_field] != nil and document[name_field] != "" %}
+  {{ document[name_field] | decrypt | strip_html }}
+{% else %}
+  {% capture first_name_field %}{{ address }}first_name{% endcapture %}
+  {% capture first_name %}{{ document[first_name_field] | decrypt | strip_html }}{% endcapture %}
+
+  {% capture last_name_field %}{{ address }}last_name{% endcapture %}
+  {% capture last_name %}{{ document[last_name_field] | decrypt | strip_html }}{% endcapture %}
+
+  {% if first_name != "" or last_name != "" %}
+    {{ first_name | strip_html }} {{ last_name | strip_html }}
+  {% else %}
+    -
+  {% endif %}
+{% endif %}
+
+{% assign field_names = "personal_identifier company vat_number" | split: " " %}
+
+{% for field_name in field_names %}
+
+  {% capture name_field %}{{ address }}{{ field_name }}{% endcapture %}
+  {% capture field %}{{ document[name_field] | decrypt | strip_html }}{% endcapture %}
+
+  {% if field != "" and field != nil %}
+
+    &nbsp;· {{ field }}
+
+  {% endif %}
+
+{% endfor %}

@@ -1,0 +1,20 @@
+{
+  "categories": {
+    "klass": "categories",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    }
+  },
+  "webshops": {
+    "klass": "webshops",
+    "query": {
+      "_id": "{{ _id }}",
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "relay_id": 1
+    }
+  }
+}

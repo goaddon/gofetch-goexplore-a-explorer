@@ -1,0 +1,84 @@
+<h5 class="mb-4">
+  {% capture anchor %}action=auths__new&relay_id={{ webshop.relay_id }}&webshop_id={{ webshop._id }}{% endcapture %}
+  {{ l.headline_1 }} {{ l.headline_2 }} <a href="{{ 'integrations__index' | path_for: anchor: anchor }}">{{ webshop._id }}</a>
+</h5>
+
+<table class="table">
+  <tbody>
+    {% assign fields = "remote_id name meta_title meta_description path parent_remote_id status template sort_order" | split: " " %}
+
+    {% for field in fields %}
+      {% if category[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ category[field] | decrypt | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "published_scope" | split: " " %}
+
+    {% for field in fields %}
+      {% if category[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ category[field] | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "breadcrumbs" | split: " " %}
+
+    {% for field in fields %}
+      {% if category[field] != nil and category[field].size > 0 %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% for item in category[field] %}
+              <span class="border rounded text-nowrap px-1 border-secondary me-1">{{ item | decrypt | strip_html }}</span>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "published searchable" | split: " " %}
+
+    {% for field in fields %}
+      {% if category[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% if category[field] %}
+              {{ l.bools.yes }}
+            {% else %}
+              {{ l.bools.no }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% assign descriptions = "description_1 description_2" | split: " " %}
+
+{% for description in descriptions %}
+  {% if category[description] != nil and category[description] != "" %}
+    <div class="bg-light mt-4 p-2 border rounded">
+      {{ category[description] | decrypt | escape }}
+    </div>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,10 @@
+{
+  "en": {
+    "headers": {
+      "created_at": "Parcel shipped",
+      "courier": "Courier",
+      "tracking_number": "Tracking number",
+      "order_lines": "Order lines"
+    }
+  }
+}

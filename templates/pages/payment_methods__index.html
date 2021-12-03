@@ -1,0 +1,5 @@
+{% assign payment_methods_query   = "payment_methods" | db_find: company_id: account._id %}
+{% assign klass                   = "payment_methods" %}
+{% assign documents               = payment_methods_query.results %}
+
+{% include "shared/tools" %}

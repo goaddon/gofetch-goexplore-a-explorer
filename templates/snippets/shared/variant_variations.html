@@ -1,0 +1,7 @@
+{% assign variations = "" %}
+{% for variation in variant.variations %}
+  {% if variations != "" %}
+    {% capture variations %}{{ variations }}, {% endcapture %}
+  {% endif %}
+  {% capture variations %}{{ variations }}{{ variation.type | decrypt | strip_html }}: {{ variation.value | decrypt | strip_html }}{% endcapture %}
+{% endfor %}

@@ -1,0 +1,7 @@
+{
+  "en": {
+    "payment_pending": "Payment pending",
+    "initialized_at_1": "Order was created",
+    "initialized_at_2": ", but the payment has not been confirmed yet."
+  }
+}

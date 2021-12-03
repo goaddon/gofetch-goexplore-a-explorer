@@ -1,0 +1,8 @@
+{% assign statuses_query   = "statuses" | db_find: company_id: account._id, _id: params.id %}
+{% assign status           = statuses_query.results.first %}
+
+{% if status != nil %}
+  {% assign webshops_query  = "webshops" | db_find: _id: status.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+  {% include "status" %}
+{% endif %}

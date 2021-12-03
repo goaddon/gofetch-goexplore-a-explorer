@@ -1,0 +1,5 @@
+{% assign countries_query   = "countries" | db_find: company_id: account._id %}
+{% assign klass             = "countries" %}
+{% assign documents         = countries_query.results %}
+
+{% include "shared/tools" %}

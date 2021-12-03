@@ -1,0 +1,7 @@
+{% assign phone_field = "phone" %}
+{% capture phone_field %}{{ address }}{{ phone_field }}{% endcapture %}
+{% if document[phone_field] != nil and document[phone_field] != "" %}
+  <i class="fas fa-phone"></i> {{ document[phone_field] | decrypt | strip_html }}
+{% else %}
+  -
+{% endif %}

@@ -1,0 +1,11 @@
+{
+  "en": {
+    "headers": {
+      "order_number": "ID",
+      "time_since_ordered": "ORDERED",
+      "time_since_shipped": "SHIPPED",
+      "business_handling_days": "HANDLING DAYS",
+      "state": "STATUS"
+    }
+  }
+}

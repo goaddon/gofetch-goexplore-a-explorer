@@ -1,0 +1,15 @@
+<table width="100%">
+  <tbody>
+    {% assign notes = "company_note customer_note" | split: " " %}
+    {% for note in notes %}
+      <tr>
+        <td width="180">
+          <b>{{ l.headers[note] }}:</b>
+        </td>
+        <td>
+          {% include "order/notes/note" %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

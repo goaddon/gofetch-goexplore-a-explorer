@@ -1,0 +1,16 @@
+{
+  "en": {
+    "headlines": {
+      "stock_messages": "Stock message",
+      "delivery_methods": "Delivery method",
+      "payment_methods": "Payment method",
+      "statuses": "Status",
+      "countries": "Country"
+    },
+    "headline_2": "from webshop",
+    "headers": {
+      "name": "Name",
+      "remote_id": "Remote ID"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "products": {
+    "klass": "products",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    }
+  },
+  "variants": {
+    "klass": "variants",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "product_id": "{{ product_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "sku": 1,
+      "variations": 1,
+      "stock": 1,
+      "stock_message_id": 1
+    },
+    "sort": {
+      "_id": 1
+    }
+  },
+  "webshops": {
+    "klass": "webshops",
+    "query": {
+      "_id": "{{ _id }}",
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "relay_id": 1
+    }
+  },
+  "stock_messages": {
+    "klass": "stock_messages",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1
+    }
+  }
+}

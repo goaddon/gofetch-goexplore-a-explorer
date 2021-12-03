@@ -1,0 +1,24 @@
+<h5 class="mb-4">{{ l.headline }}</h5>
+
+{% include "shared/search" %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="border-bottom-0 text-nowrap" width="1">{{ l.headers.sku }}</th>
+      <th class="border-bottom-0">{{ l.headers.name }}</th>
+      <th class="border-bottom-0">{{ l.headers.sku_2 }}</th>
+      <th class="border-bottom-0">{{ l.headers.sku_3 }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+      <tr>
+        <td>{% include "products/sku" %}</td>
+        <td>{% include "products/name" %}</td>
+        <td>{% include "products/sku_2" %}</td>
+        <td>{% include "products/sku_3" %}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+{% assign filter_options  = "remote_id name" | split: " " %}
+
+{% include "shared/filter_search" %}
+
+{% assign categories_query  = "categories" | db_find: query: query, page: params.page, per_page: params.per_page %}
+{% assign categories        = categories_query.results %}
+{% assign per_page          = categories_query.per_page %}
+
+{% include "categories" %}
+
+{% assign page              = categories_query.page %}
+{% assign pages_count       = categories_query.pages_count %}
+
+{% include "shared/pagination" %}

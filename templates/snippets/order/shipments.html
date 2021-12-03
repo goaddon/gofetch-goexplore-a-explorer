@@ -1,0 +1,21 @@
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th class="border-bottom-0">{{ l.headers.created_at }}</th>
+      <th class="border-bottom-0">{{ l.headers.courier }}</th>
+      <th class="border-bottom-0">{{ l.headers.tracking_number }}</th>
+      <th class="border-bottom-0">{{ l.headers.order_lines }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for shipment in shipments %}
+      <tr>
+        <td>{% include "order/shipments/created_at" %}</td>
+        <td>{% include "order/shipments/courier" %}</td>
+        <td>{% include "order/shipments/tracking_number" %}</td>
+        {% assign embedded_order_lines = shipment.order_lines %}
+        <td>{% include "order/order_lines/embedded_order_lines" %}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

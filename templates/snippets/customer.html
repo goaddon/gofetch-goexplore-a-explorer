@@ -1,0 +1,188 @@
+<table class="table">
+  <tbody>
+    {% assign fields = "remote_id first_name last_name personal_identifier company vat_number password company_note" | split: " " %}
+
+    {% for field in fields %}
+      {% if customer[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ customer[field] | decrypt | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "vat_class vat_pct group language currency" | split: " " %}
+
+    {% for field in fields %}
+      {% if customer[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {{ customer[field] | strip_html }}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "tags" | split: " " %}
+
+    {% for field in fields %}
+      {% if customer[field] != nil and customer[field].size > 0 %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% for item in customer[field] %}
+              <span class="border rounded text-nowrap px-1 border-secondary me-1">{{ item | decrypt | strip_html }}</span>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+    {% assign fields = "confirmed invited accepts_marketing" | split: " " %}
+
+    {% for field in fields %}
+      {% if customer[field] != nil %}
+        <tr>
+          <td class="pe-3">
+            <b>{{ l.headers[field] }}:</b>
+          </td>
+          <td>
+            {% if customer[field] %}
+              {{ l.bools.yes }}
+            {% else %}
+              {{ l.bools.no }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if customer.addresses != nil and customer.addresses.size > 0 %}
+  <div class="row">
+    {% for address in customer.addresses %}
+      <div class="col-auto bg-light rounded m-2 py-2 px-3">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                {% if address.name != nil and address.name != "" %}
+                  {{ address.name | decrypt | strip_html }}
+                {% else %}
+                  {% if address.first_name != "" or address.last_name != "" %}
+                    {{ address.first_name | decrypt | strip_html }} {{ address.last_name | decrypt | strip_html }}
+                  {% else %}
+                    -
+                  {% endif %}
+                  {% if address.company != "" and address.company != nil %}
+
+                    &nbsp;· {{ address.company | decrypt | strip_html }}
+
+                  {% endif %}
+
+                  {% if address.vat_number != "" and address.vat_number != nil %}
+
+                    {% if address.company != "" and address.company != nil %}
+                      &nbsp;·&nbsp;
+                    {% endif %}
+
+                    {{ address.vat_number | decrypt | strip_html }}
+
+                  {% endif %}
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {% if address.address_1 != nil and address.address_1 != "" %}
+                  {{ address.address_1 | decrypt | strip_html }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {% if address.address_2 != nil and address.address_2 != "" %}
+                  {{ address.address_2 | decrypt | strip_html }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            <tr>
+              <td>
+                {% assign zip_code_city_province  = "" %}
+                {% assign field_names             = "zip_code city province" | split: " " %}
+
+                {% for field_name in field_names %}
+                  {% if address[field_name] != nil and address[field_name] != "" %}
+                    {% if zip_code_city_province != "" %}
+                      {% if field_name == "city" %}
+                        {% capture zip_code_city_province %}{{ zip_code_city_province }} {% endcapture %}
+                      {% elsif field_name == "province" %}
+                        {% capture zip_code_city_province %}{{ zip_code_city_province }} · {% endcapture %}
+                      {% endif %}
+                    {% endif %}
+                    {% capture zip_code_city_province %}{{ zip_code_city_province }} {{ address[field_name] | decrypt | strip_html }}{% endcapture %}
+                  {% endif %}
+                {% endfor %}
+                {% assign country_id = address.country_id %}
+                {% if country_id != nil %}
+                  {% assign country = countries[country_id] %}
+                  {% if country != nil %}
+                    {% if zip_code_city_province != "" %}
+                      {% capture zip_code_city_province %}{{ zip_code_city_province }} · {% endcapture %}
+                    {% endif %}
+                    {% capture zip_code_city_province %}{{ zip_code_city_province | strip_html }} <a href="{{ 'countries__show' | path_for: id: country._id }}">{{ country.name | strip_html }}</a>{% endcapture %}
+                    {{ zip_code_city_province }}
+                  {% endif %}
+                {% endif %}
+                {% if country_id == nil %}
+                  {% if zip_code_city_province == "" %}
+                    -
+                  {% else %}
+                    {{ zip_code_city_province }}
+                  {% endif %}
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {% if address.phone != nil and address.phone != "" %}
+                  <i class="fas fa-phone-square-alt"></i>
+                  {{ address.phone | decrypt | strip_html }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {% assign address_types = "billing shipping" | split: " " %}
+                {% for address_type in address_types %}
+                  {% capture field_name %}{{ address_type }}_default{% endcapture %}
+                  {% if address[field_name] == true %}
+                    <span class="border rounded text-nowrap px-1 border-secondary me-1">
+                      <i class="fas fa-check"></i>
+                      {{ l.labels[field_name] }}
+                    </span>
+                  {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

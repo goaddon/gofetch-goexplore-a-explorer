@@ -1,0 +1,8 @@
+{% assign payment_methods_query = "payment_methods" | db_find: company_id: account._id, _id: params.id %}
+{% assign payment_method        = payment_methods_query.results.first %}
+
+{% if payment_method != nil %}
+  {% assign webshops_query  = "webshops" | db_find: _id: payment_method.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+  {% include "payment_method" %}
+{% endif %}

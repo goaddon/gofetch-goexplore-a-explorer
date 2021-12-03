@@ -1,0 +1,38 @@
+{% assign customers_query = "customers" | db_find: company_id: account._id, _id: params.id %}
+{% assign customer        = customers_query.results.first %}
+
+{% if customer != nil %}
+  <h5 class="mb-4">{{ l.headline }} {{ customer.email | decrypt | strip_html }}</h5>
+
+  {% if customer.addresses != nil and customer.addresses.size > 0 %}
+    {% assign country_ids = "" %}
+    {% for address in customer.addresses %}
+      {% if address.country_id != nil %}
+        {% capture country_ids %}{{ country_ids }} {{ address.country_id }}{% endcapture %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign country_ids = country_ids | strip | split: " " | uniq %}
+
+    {% if country_ids.size > 0 %}
+
+      {% assign countries_query = "countries" | db_find: company_id: account._id, _ids: country_ids %}
+      {% assign countries       = countries_query.results | to_hash: "_id" %}
+
+    {% endif %}
+  {% endif %}
+
+  {% assign orders_query     = "orders" | db_find: company_id: account._id, page: params.page, per_page: params.per_page, customer_id: customer._id %}
+  {% assign orders           = orders_query.results %}
+
+  {% include "orders/find_shipments" %}
+  {% include "customer" %}
+  {% include "orders" %}
+
+  {% assign page            = orders_query.page %}
+  {% assign per_page        = orders_query.per_page %}
+  {% assign pages_count     = orders_query.pages_count %}
+
+  {% include "shared/pagination" %}
+
+{% endif %}

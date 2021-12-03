@@ -1,0 +1,14 @@
+{
+  "en": {
+    "headers": {
+      "created_at": "Invoice created",
+      "remote_id": "ID",
+      "shipping_amount": "Shipping",
+      "payment_amount": "Payment",
+      "amount": "Amount",
+      "captured_amount": "Captured",
+      "paid_amount": "Paid",
+      "order_lines": "Order lines"
+    }
+  }
+}

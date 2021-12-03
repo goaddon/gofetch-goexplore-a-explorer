@@ -1,0 +1,8 @@
+{% assign countries_query   = "countries" | db_find: company_id: account._id, _id: params.id %}
+{% assign country           = countries_query.results.first %}
+
+{% if country != nil %}
+  {% assign webshops_query  = "webshops" | db_find: _id: country.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+  {% include "country" %}
+{% endif %}

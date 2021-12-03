@@ -1,0 +1,108 @@
+  <p>
+    <a href="#details_2" aria-controls="details_2" aria-expanded="false" data-bs-toggle="collapse">
+      {{ l.link_title }} <i class="fas fa-caret-down"></i>
+    </a>
+  </p>
+
+  <div id="details_2" class="collapse mb-3">
+    <table width="100%">
+      <tbody>
+
+        {% assign fields = "remote_id browser_accept_language browser_ip browser_session_hash browser_user_agent cart_token checkout_token" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil and order[field] != "" %}
+            <tr class="align-top">
+              <td width="180">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {{ order[field] | decrypt | strip_html }}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+        {% assign fields = "browser_height_px browser_width_px discount_amount vat_pct cancellation_reason landing_page language ordering_method processing_location processing_method reference referer_page" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil and order[field] != "" %}
+            <tr class="align-top">
+              <td width="180">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {{ order[field] | strip_html }}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+        {% assign fields = "accepts_marketing" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil and order[field] != "" %}
+            <tr class="align-top">
+              <td width="180">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {% if order[field] %}
+                  {{ l.bools.yes }}
+                {% else %}
+                  {{ l.bools.no }}
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+        {% assign fields = "discount_codes tags" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil and order[field].size > 0 %}
+            <tr>
+              <td class="pe-3">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {% for item in order[field] %}
+                  <span class="border rounded text-nowrap px-1 border-secondary me-1">{{ item | strip_html }}</span>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+        {% assign fields = "_id" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil %}
+            <tr>
+              <td class="pe-3">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {{ order[field] | generation_time | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+
+        {% assign fields = "updated_at closed_at cancelled_at refunded_at" | split: " " %}
+
+        {% for field in fields %}
+          {% if order[field] != nil %}
+            <tr>
+              <td class="pe-3">
+                <b>{{ l.headers[field] }}:</b>
+              </td>
+              <td>
+                {{ order[field] | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>

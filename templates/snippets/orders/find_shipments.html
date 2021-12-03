@@ -1,0 +1,10 @@
+{% assign order_ids = "" %}
+
+{% for order in orders %}
+  {% capture order_ids %}{{ order_ids }} {{ order._id }}{% endcapture %}
+{% endfor %}
+
+{% assign order_ids = order_ids | strip | split: " " %}
+
+{% assign shipments = "shipments" | db_find: company_id: account._id, order_ids: order_ids %}
+{% assign shipments = shipments.results | to_hash_groups: "order_id" %}

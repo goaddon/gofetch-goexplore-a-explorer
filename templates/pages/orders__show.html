@@ -1,0 +1,114 @@
+{% assign orders_query  = "orders" | db_find: company_id: account._id, _id: params.id %}
+{% assign order         = orders_query.results.first %}
+
+{% if order != nil %}
+
+  {% assign webshops_query    = "webshops" | db_find: _id: order.webshop_id, company_id: account._id %}
+  {% assign webshop           = webshops_query.results.first %}
+
+  {% if order.payment_method_id != nil %}
+    {% assign payment_methods_query   = "payment_methods" | db_find: company_id: account._id, _id: order.payment_method_id %}
+    {% assign payment_method          = payment_methods_query.results.first %}
+  {% endif %}
+
+  {% if order.delivery_method_id != nil %}
+    {% assign delivery_methods_query  = "delivery_methods" | db_find: company_id: account._id, _id: order.delivery_method_id %}
+    {% assign delivery_method         = delivery_methods_query.results.first %}
+  {% endif %}
+
+  {% if order.status_id != nil %}
+    {% assign statuses_query           = "statuses" | db_find: company_id: account._id, _id: order.status_id %}
+    {% assign status                   = statuses_query.results.first %}
+  {% endif %}
+
+  {% assign shipments_query     = "shipments" | db_find: company_id: account._id, order_id: order._id %}
+  {% assign shipments           = shipments_query.results %}
+
+  {% capture country_ids %}{{ order.billing_country_id }} {{ order.shipping_country_id }}{% endcapture %}
+
+  {% for shipment in shipments %}
+    {% if shipment.country_id != nil %}
+      {% capture country_ids %}{{ country_ids }} {{ shipment.country_id }}{% endcapture %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign country_ids         = country_ids | strip | split: " " | uniq %}
+  {% if country_ids.size > 0 %}
+    {% assign countries_query         = "countries" | db_find: company_id: account._id, _ids: country_ids %}
+    {% assign countries               = countries_query.results | to_hash: "_id" %}
+  {% endif %}
+
+  {% assign invoices_query      = "invoices" | db_find: company_id: account._id, order_id: order._id %}
+  {% assign invoices            = invoices_query.results %}
+
+  {% assign credit_notes_query  = "credit_notes" | db_find: company_id: account._id, order_id: order._id %}
+  {% assign credit_notes        = credit_notes_query.results %}
+
+  {% assign order_lines_query   = "order_lines" | db_find: company_id: account._id, order_id: order._id %}
+  {% assign order_lines         = order_lines_query.results %}
+
+  {% if order_lines.size > 0 or shipments.size > 0 or invoices.size > 0 or credit_notes.size > 0 %}
+    {% assign variant_ids = "" %}
+    {% for order_line in order_lines %}
+      {% if order_line.variant_id != nil %}
+        {% capture variant_ids %}{{ variant_ids }} {{ order_line.variant_id }}{% endcapture %}
+      {% endif %}
+    {% endfor %}
+
+    {% for shipment in shipments %}
+      {% if shipment.order_lines != nil %}
+        {% for order_line in shipment.order_lines %}
+          {% if order_line.variant_id != nil %}
+            {% capture variant_ids %}{{ variant_ids }} {{ order_line.variant_id }}{% endcapture %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% for invoice in invoices %}
+      {% if invoice.order_lines != nil %}
+        {% for order_line in invoice.order_lines %}
+          {% if order_line.variant_id != nil %}
+            {% capture variant_ids %}{{ variant_ids }} {{ order_line.variant_id }}{% endcapture %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% for credit_note in credit_notes %}
+      {% if credit_note.order_lines != nil %}
+        {% for order_line in credit_note.order_lines %}
+          {% if order_line.variant_id != nil %}
+            {% capture variant_ids %}{{ variant_ids }} {{ order_line.variant_id }}{% endcapture %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {% if variant_ids != "" %}
+      {% assign variant_ids     = variant_ids | strip | split: " " | uniq %}
+      {% assign variants_query  = "variants" | db_find: company_id: account._id, _ids: variant_ids %}
+      {% assign variants        = variants_query.results %}
+
+      {% if variants.size > 0 %}
+        {% assign product_ids = "" %}
+        {% for variant in variants %}
+          {% if variant.product_id != nil %}
+            {% capture product_ids %}{{ product_ids }} {{ variant.product_id }}{% endcapture %}
+          {% endif %}
+        {% endfor %}
+        {% if product_ids != "" %}
+          {% assign product_ids     = product_ids | strip | split: " " %}
+          {% assign products_query  = "products" | db_find: company_id: account._id, _ids: product_ids %}
+          {% assign products        = products_query.results | to_hash: "_id" %}
+        {% endif %}
+      {% endif %}
+
+      {% assign variants     = variants | to_hash: "_id" %}
+
+    {% endif %}
+  {% endif %}
+
+  {% include "order" %}
+
+{% endif %}

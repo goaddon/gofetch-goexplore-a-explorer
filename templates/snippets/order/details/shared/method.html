@@ -1,0 +1,15 @@
+{% if method != nil %}
+  {% capture method_path %}{{ klass }}__show{% endcapture %}
+  <a href="{{ method_path | path_for: id: method._id }}">
+    {% if method.name != nil %}
+      {{ method.name | strip_html }}
+    {% else %}
+      {{ method.remote_id | strip_html }}
+    {% endif %}
+  </a>
+  {% if method_price != nil %}
+    &nbsp;({{ method_price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }})
+  {% endif %}
+{% elsif method_price != nil %}
+  {{ method_price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }}
+{% endif %}

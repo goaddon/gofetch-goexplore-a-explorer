@@ -1,0 +1,3 @@
+<a href="{{ 'products__show' | path_for: id: product._id }}" class="text-nowrap">
+  {{ product.sku | decrypt | strip_html }}
+</a>

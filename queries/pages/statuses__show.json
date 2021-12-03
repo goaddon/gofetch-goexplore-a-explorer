@@ -1,0 +1,26 @@
+{
+  "statuses": {
+    "klass": "statuses",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1,
+      "remote_id": 1,
+      "webshop_id": 1
+    }
+  },
+  "webshops": {
+    "klass": "webshops",
+    "query": {
+      "_id": "{{ _id }}",
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "relay_id": 1
+    }
+  }
+}

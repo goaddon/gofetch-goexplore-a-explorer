@@ -1,0 +1,27 @@
+{% if filter_options contains params.filter %}
+
+  {% assign filter = params.filter %}
+
+{% else %}
+
+  {% assign filter = filter_options.first %}
+
+{% endif %}
+
+{% assign query = nil | new_hash: company_id: account._id %}
+
+{% if params.search != nil and params.search != "" %}
+
+  {% if filter == "order_number" %}
+
+    {% assign search  = params.search %}
+
+  {% else %}
+
+    {% assign search  = params.search | encrypt %}
+
+  {% endif %}
+
+  {% assign query   = query | push_to_hash: filter, search %}
+
+{% endif %}

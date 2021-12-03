@@ -1,0 +1,50 @@
+{
+  "en": {
+    "price_delimiter": ".",
+    "bools": {
+      "yes": "Yes",
+      "no": "No"
+    },
+    "headers": {
+      "variations": "Variations",
+      "sku": "SKU",
+      "sku_2": "SKU 2",
+      "sku_3": "SKU 3",
+      "name": "Name",
+      "price": "Price",
+      "offer_price": "Offer price",
+      "before_price": "Before price",
+      "manage_stock": "Manage stock",
+      "allow_backorders": "Allow backorders",
+      "published": "Published",
+      "searchable": "Searchable",
+      "type": "Type",
+      "low_stock_limit": "Low stock limit",
+      "meta_title": "Meta title",
+      "meta_description": "Meta description",
+      "manufactorer": "Manufactorer",
+      "template": "Template",
+      "tags": "Tags",
+      "path": "Path",
+      "weight": "Weight",
+      "length": "Length",
+      "height": "Height",
+      "unboxed_weight": "Unboxed weight",
+      "unboxed_length": "Unboxed length",
+      "unboxed_width": "Unboxed width",
+      "unboxed_height": "Unboxed height",
+      "weight_unit": "Weight unit",
+      "size_unit": "Weight unit",
+      "published_scope": "Published scope",
+      "status": "Status",
+      "campaign": "Campaign",
+      "campaign_started_at": "Campaign start",
+      "campaign_finished_at": "Campaign end",
+      "offer_started_at": "Offer start",
+      "offer_finished_at": "Offer end",
+      "_id": "Created in database",
+      "updated_at": "Updated in database",
+      "barcode": "Barcode"
+    }
+  }
+}

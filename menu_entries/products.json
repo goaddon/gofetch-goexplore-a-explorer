@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "Products"
+  },
+  "paths": [
+    {
+      "controller": "products",
+      "action": "index"
+    },
+    {
+      "controller": "products"
+    },
+    {
+      "controller": "variants"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{% assign delivery_methods_query  = "delivery_methods" | db_find: company_id: account._id, _id: params.id %}
+{% assign delivery_method         = delivery_methods_query.results.first %}
+
+{% if delivery_method != nil %}
+  {% assign webshops_query  = "webshops" | db_find: _id: delivery_method.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+  {% include "delivery_method" %}
+{% endif %}

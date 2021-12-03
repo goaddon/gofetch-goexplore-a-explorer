@@ -1,0 +1,11 @@
+{
+  "en": {
+    "headline": "Products",
+    "headers": {
+      "sku": "SKU",
+      "name": "Name",
+      "sku_2": "SKU 2",
+      "sku_3": "SKU 3"
+    }
+  }
+}

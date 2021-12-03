@@ -1,0 +1,11 @@
+{
+  "en": {
+    "headlines": {
+      "stock_messages": "Stock messages",
+      "statuses": "Statuses",
+      "payment_methods": "Payment methods",
+      "delivery_methods": "Delivery methods",
+      "countries": "Countries"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{% assign zip_code_city_province   = "" %}
+{% assign field_names             = "zip_code city province" | split: " " %}
+
+{% for field_name in field_names %}
+  {% capture field %}{{ address }}{{ field_name }}{% endcapture %}
+  {% if document[field] != nil and document[field] != "" %}
+    {% if zip_code_city_province != "" %}
+      {% if field_name == "city" %}
+        {% capture zip_code_city_province %}{{ zip_code_city_province }} {% endcapture %}
+      {% elsif field_name == "province" %}
+        {% capture zip_code_city_province %}{{ zip_code_city_province }} · {% endcapture %}
+      {% endif %}
+    {% endif %}
+    {% capture zip_code_city_province %}{{ zip_code_city_province }} {{ document[field] | decrypt | strip_html }}{% endcapture %}
+  {% endif %}
+{% endfor %}
+{% capture country_field %}{{ address }}country_id{% endcapture %}
+{% assign country_id = document[country_field] %}
+{% if country_id != nil %}
+  {% assign country = countries[country_id] %}
+  {% if country != nil %}
+    {% if zip_code_city_province != "" %}
+      {% capture zip_code_city_province %}{{ zip_code_city_province }} · {% endcapture %}
+    {% endif %}
+    {% capture zip_code_city_province %}{{ zip_code_city_province | strip_html }} <a href="{{ 'countries__show' | path_for: id: country._id }}">{{ country.name | strip_html }}</a>{% endcapture %}
+    {{ zip_code_city_province }}
+  {% endif %}
+{% endif %}
+{% if country_id == nil %}
+  {% if zip_code_city_province == "" %}
+    -
+  {% else %}
+    {{ zip_code_city_province }}
+  {% endif %}
+{% endif %}

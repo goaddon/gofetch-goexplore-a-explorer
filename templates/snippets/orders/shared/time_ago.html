@@ -1,0 +1,12 @@
+{% for interval in time_ago %}
+  {{ interval.number }}
+  {% assign unit = interval.unit %}
+  {% if interval.number == 1 %}
+    {% capture unit %}{{ unit }}_1{% endcapture %}
+  {% endif %}
+  {{ l[unit] }}
+  {% if time_ago.size > 1 and time_ago[-1].unit != interval.unit %}
+    ,&nbsp;
+  {% endif %}
+{% endfor %}
+{{ l.ago }}

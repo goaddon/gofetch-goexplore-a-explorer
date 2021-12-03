@@ -1,0 +1,99 @@
+<h5 class="mb-4">
+  {{ l.headline_1 }}
+  {% if product != nil %}
+    {% if product.name == nil or product.name == "" %}
+      {% assign product_name = l.no_product_name %}
+    {% else %}
+      {% assign product_name = product.name | decrypt | strip_html %}
+    {% endif %}
+    &nbsp;{{ l.headline_2 }} <a href="{{ 'products__show' | path_for: id: product._id }}">{{ product_name }}</a>
+  {% endif %}
+</h5>
+
+{% include "shared/product_variant_attributes" %}
+
+{% if document.stock_movements != nil %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="border-bottom-0">{{ l.headers.event_description }}</th>
+        <th class="border-bottom-0">{{ l.headers.event_quantity }}</th>
+        <th class="border-bottom-0">{{ l.headers.event_stock }}</th>
+        <th class="border-bottom-0">{{ l.headers.event_stock_message }}</th>
+        <th class="border-bottom-0">{{ l.headers.event_created_at }}</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% assign stock_movements           = document.stock_movements | concat: orders | sort: "created_at" %}
+      {% assign stock_message_ids         = "" %}
+      {% assign stock_message_id          = nil %}
+      {% assign stocks                    = "" %}
+      {% assign stock                     = nil %}
+
+      {% for stock_movement in stock_movements %}
+        {% if stock_movement.created_at != nil %}
+
+          {% if stock_movement.order_number == nil %}
+
+            {% assign stock_message_id  = stock_movement.stock_message_id %}
+            {% assign stock             = stock_movement.stock %}
+
+          {% else %}
+
+            {% assign order_line        = order_lines[stock_movement._id] %}
+            {% if stock != nil %}
+              {% assign stock = stock | minus: order_line.quantity %}
+            {% endif %}
+
+          {% endif %}
+
+          {% if stock_message_id == nil %}
+            {% capture stock_message_ids %}{{ stock_message_ids }} nil{% endcapture %}
+          {% else %}
+            {% capture stock_message_ids %}{{ stock_message_ids }} {{ stock_message_id }}{% endcapture %}
+          {% endif %}
+
+          {% if stock == nil %}
+            {% capture stocks %}{{ stocks }} nil{% endcapture %}
+          {% else %}
+            {% capture stocks %}{{ stocks }} {{ stock }}{% endcapture %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign stock_message_ids   = stock_message_ids | strip | split: " " | reverse %}
+      {% assign stocks              = stocks | strip | split: " " | reverse %}
+      {% assign stock_movements     = stock_movements | reverse %}
+      {% assign now                 = "now" | in_time_zone %}
+      {% assign webshop_created_at  = webshop._id | generation_time | in_time_zone %}
+      {% assign last_datetime       = nil %}
+      {% assign counter             = 0 %}
+
+      {% for stock_movement in stock_movements %}
+        {% if stock_movement.created_at != nil %}
+
+          {% include "variant/webshop_created" %}
+
+          {% assign last_datetime     = stock_movement.created_at | in_time_zone %}
+          {% assign stock_message_id  = nil %}
+
+          {% if stock_movement.order_number == nil %}
+            {% assign order_line = nil %}
+          {% else %}
+            {% assign order_line = order_lines[stock_movement._id] %}
+          {% endif %}
+
+          <tr>
+            <td>{% include "variant/event_description" %}</td>
+            <td>{% include "variant/event_quantity" %}</td>
+            <td>{% include "variant/event_stock" %}</td>
+            <td>{% include "variant/event_stock_message" %}</td>
+            <td>{% include "variant/event_created_at" %}</td>
+          </tr>
+          {% assign counter = counter | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

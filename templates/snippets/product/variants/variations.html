@@ -1,0 +1,7 @@
+{% if variant.variations == nil or variant.variations.size == 0 %}
+  {{ l.no_variations }}
+{% else %}
+  {% for variation in variant.variations %}
+    &nbsp;<span class="border rounded text-nowrap px-1 border-secondary me-1">{{ variations }}{{ variation.type | decrypt | strip_html }}: {{ variation.value | decrypt | strip_html }}</span>
+  {% endfor %}
+{% endif %}

@@ -1,0 +1,11 @@
+{% assign categories_query  = "categories" | db_find: company_id: account._id, _id: params.id %}
+{% assign category          = categories_query.results.first %}
+
+{% if category != nil %}
+
+  {% assign webshops_query  = "webshops" | db_find: _id: category.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+
+  {% include "category" %}
+
+{% endif %}

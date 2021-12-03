@@ -1,0 +1,44 @@
+{% assign order_line_product_name = order_line.product_name | decrypt | strip_html %}
+{% if product == nil %}
+  {% assign product_name = nil %}
+{% else %}
+  {% assign product_name = product.name | decrypt | strip_html %}
+{% endif %}
+
+{% if order_line_product_name != nil and product_name != nil and order_line_product_name != product_name %}
+  {% assign main_product_name   = order_line_product_name | truncate: max_name_chars %}
+  {% assign sub_product_name    = product_name | truncate: max_name_chars %}
+  {% capture product_name_title %}{{ l.product_name_mismatch_1 }}: {{ order_line_product_name }}\n{{ l.product_name_mismatch_2 }}: {{ product_name }}{% endcapture %}
+{% else %}
+  {% if order_line_product_name != nil %}
+    {% assign chosen_product_name = order_line_product_name %}
+  {% elsif product_name != nil %}
+    {% assign chosen_product_name = product_name %}
+  {% else %}
+    {% assign chosen_product_name = nil %}
+  {% endif %}
+  {% assign sub_product_name = nil %}
+  {% if chosen_product_name != nil and chosen_product_name.size > max_name_chars %}
+    {% assign main_product_name   = chosen_product_name | truncate: max_name_chars %}
+    {% assign product_name_title  = chosen_product_name %}
+  {% else %}
+    {% assign main_product_name   = chosen_product_name %}
+    {% assign product_name_title  = nil %}
+  {% endif %}
+{% endif %}
+{% if main_product_name != nil %}
+  {% if product != nil %}
+    <a href="{{ 'products__show' | path_for: id: product._id }}" title="{{ product_name_title }}">
+      {{ main_product_name | strip_html }}
+    </a>
+  {% else %}
+    <span title="{{ product_name_title }}">
+      {{ main_product_name | strip_html }}
+    </span>
+  {% endif %}
+  {% if sub_product_name != nil %}
+    <div>
+      <i>{{ sub_product_name | strip_html }}</i>
+    </div>
+  {% endif %}
+{% endif %}

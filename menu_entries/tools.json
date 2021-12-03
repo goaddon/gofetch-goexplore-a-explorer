@@ -1,0 +1,26 @@
+{
+  "title": {
+    "en": "Tools"
+  },
+  "paths": [
+    {
+      "controller": "countries",
+      "action": "index"
+    },
+    {
+      "controller": "stock_messages"
+    },
+    {
+      "controller": "payment_methods"
+    },
+    {
+      "controller": "delivery_methods"
+    },
+    {
+      "controller": "countries"
+    },
+    {
+      "controller": "statuses"
+    }
+  ]
+}

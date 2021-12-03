@@ -1,0 +1,17 @@
+{% if embedded_order_lines != nil %}
+  {% for order_line in embedded_order_lines %}
+    {% include "order/order_lines/find_variant_and_product" %}
+    <p>
+      {{ order_line.quantity }} {{ l.pcs }}
+      {% if product != nil %}
+        <a href="{{ 'products__show' | path_for: id: product._id }}"><span title="{{ product.name | decrypt | strip_html }}">{{ product.name | decrypt | strip_html | truncate: max_name_chars }}</span></a> ·
+      {% endif %}
+
+      {% if variant != nil %}
+        {% include "order/order_lines/variant_variations" %}
+      {% else %}
+        <span title="{{ order_line.variant_sku | decrypt | strip_html }}">{{ order_line.variant_sku | decrypt | strip_html | truncate: max_variations_chars }}</span>
+      {% endif %}
+    </p>
+  {% endfor %}
+{% endif %}

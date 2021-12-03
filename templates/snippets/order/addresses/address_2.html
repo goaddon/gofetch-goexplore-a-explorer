@@ -1,0 +1,22 @@
+{% if document.billing_address_2 != nil and document.billing_address_2 != "" %}
+  {% assign billing_address_2 = document.billing_address_2 | decrypt | strip_html %}
+{% else %}
+  {% assign billing_address_2 = "-" %}
+{% endif %}
+
+{% if document.shipping_address_2 != nil and document.shipping_address_2 != "" %}
+  {% assign shipping_address_2 = document.shipping_address_2 | decrypt | strip_html %}
+{% else %}
+  {% assign shipping_address_2 = "-" %}
+{% endif %}
+
+{% if billing_address_2 != "-" or shipping_address_2 != "-" %}
+  <tr>
+    <td>
+      {{ billing_address_2 | strip_html }}
+    </td>
+    <td>
+      {{ shipping_address_2 | strip_html }}
+    </td>
+  </tr>
+{% endif %}

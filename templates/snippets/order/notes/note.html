@@ -1,0 +1,8 @@
+<i>
+  {% if order[note] != nil %}
+    {{ order[note] | decrypt | strip_html }}
+  {% else %}
+    {% capture no_note %}no_{{ note }}{% endcapture %}
+    {{ l[no_note] }}
+  {% endif %}
+</i>

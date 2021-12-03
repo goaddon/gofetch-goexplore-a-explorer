@@ -1,0 +1,52 @@
+<h5 class="mb-4">
+  {{ l.headline }}&nbsp;
+
+  {% if document.name == nil or document.name == "" %}
+    {% assign product_name = l.no_product_name %}
+  {% else %}
+    {% assign product_name = document.name | decrypt | strip_html %}
+  {% endif %}
+
+  {% assign product_url = document.url | decrypt | strip_html %}
+  {% assign https_www   = product_url | slice: 0, 5 %}
+  {% if https_www != "https" %}
+    {% if https_www == "www." %}
+      {% capture product_url %}https://{{ product_url }}{% endcapture %}
+    {% else %}
+      {% assign first_char = product_url | slice: 0 %}
+      {% if first_char != "/" %}
+        {% capture product_url %}/{{ product_url }}{% endcapture %}
+      {% endif %}
+      {% capture product_url %}https://{{ account.website | strip_html }}{{ product_url }}{% endcapture %}
+    {% endif %}
+  {% endif %}
+
+  {% if product_url != nil %}
+    <a href="{{ product_url }}" target="_blank">
+      {{ product_name }} <i class="fas fa-external-link-alt"></i>
+    </a>
+  {% else %}
+    {{ product_name }}
+  {% endif %}
+</h5>
+
+{% include "shared/product_variant_attributes" %}
+
+{% if variants.size > 0 %}
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th class="border-bottom-0">{{ l.variant_headers.sku }}</th>
+        <th class="border-bottom-0">{{ l.variant_headers.variations }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for variant in variants %}
+        <tr>
+          <td>{% include "product/variants/sku" %}</td>
+          <td>{% include "product/variants/variations" %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

@@ -1,0 +1,3 @@
+<a href="{{ 'categories__show' | path_for: id: category._id }}" class="text-nowrap">
+  {{ category.remote_id | decrypt | strip_html }}
+</a>

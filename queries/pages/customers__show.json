@@ -1,0 +1,41 @@
+{
+  "customers": {
+  "klass": "customers",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    }
+  },
+  "countries": {
+    "klass": "countries",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1
+    }
+  },
+  "orders": {
+    "klass": "orders",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "customer_id": "{{ customer_id }}"
+    },
+    "pagination": {
+      "page": 0,
+      "per_page": 10
+    },
+    "projection": {
+      "_id": 1,
+      "order_number": 1,
+      "created_at": 1,
+      "initialized_at": 1,
+      "state": 1
+    },
+    "sort": {
+      "initialized_at": -1
+    }
+  }
+}

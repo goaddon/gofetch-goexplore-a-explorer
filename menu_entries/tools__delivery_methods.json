@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Delivery methods"
+  },
+  "paths": [
+    {
+      "controller": "delivery_methods",
+      "action": "index"
+    },
+    {
+      "controller": "delivery_methods"
+    }
+  ]
+}

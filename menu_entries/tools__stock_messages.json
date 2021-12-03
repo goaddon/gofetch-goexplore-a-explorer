@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Stock messages"
+  },
+  "paths": [
+    {
+      "controller": "stock_messages",
+      "action": "index"
+    },
+    {
+      "controller": "stock_messages"
+    }
+  ]
+}

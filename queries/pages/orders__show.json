@@ -1,0 +1,184 @@
+{
+  "orders": {
+    "klass": "orders",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    }
+  },
+  "webshops": {
+    "klass": "webshops",
+    "query": {
+      "_id": "{{ _id }}",
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "relay_id": 1
+    }
+  },
+  "payment_methods": {
+    "klass": "payment_methods",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "remote_id": 1,
+      "name": 1
+    }
+  },
+  "delivery_methods": {
+    "klass": "delivery_methods",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "remote_id": 1,
+      "name": 1
+    }
+  },
+  "statuses": {
+    "klass": "statuses",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": "{{ _id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "remote_id": 1,
+      "name": 1
+    }
+  },
+  "countries": {
+    "klass": "countries",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1
+    }
+  },
+  "shipments": {
+    "klass": "shipments",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "order_id": "{{ order_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "order_id": 1,
+      "created_at": 1,
+      "tracking_number": 1,
+      "courier": 1,
+      "order_lines": 1,
+      "name": 1,
+      "company": 1,
+      "first_name": 1,
+      "last_name": 1,
+      "address_1": 1,
+      "address_2": 1,
+      "zip_code": 1,
+      "city": 1,
+      "province_code": 1,
+      "province": 1,
+      "country_id": 1
+    },
+    "sort": {
+      "created_at": 1
+    }
+  },
+  "invoices": {
+    "klass": "invoices",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "order_id": "{{ order_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "order_id": 1,
+      "remote_id": 1,
+      "shipping_amount": 1,
+      "payment_amount": 1,
+      "amount": 1,
+      "captured_amount": 1,
+      "paid_amount": 1,
+      "created_at": 1,
+      "order_lines": 1
+    },
+    "sort": {
+      "created_at": 1
+    }
+  },
+  "credit_notes": {
+    "klass": "credit_notes",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "order_id": "{{ order_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "order_id": 1,
+      "remote_id": 1,
+      "shipping_amount": 1,
+      "payment_amount": 1,
+      "amount": 1,
+      "refunded_amount": 1,
+      "returned_amount": 1,
+      "created_at": 1,
+      "order_lines": 1
+    },
+    "sort": {
+      "created_at": 1
+    }
+  },
+  "order_lines": {
+    "klass": "order_lines",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "order_id": "{{ order_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "order_id": 1,
+      "variant_id": 1,
+      "price": 1,
+      "quantity": 1,
+      "variant_sku": 1,
+      "product_name": 1
+    },
+    "sort": {
+      "_id": 1
+    }
+  },
+  "variants": {
+    "klass": "variants",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "sku": 1,
+      "product_id": 1,
+      "variations": 1
+    }
+  },
+  "products": {
+    "klass": "products",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {"$in": "{{ _ids }}"}
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1,
+      "url": 1
+    }
+  }
+}

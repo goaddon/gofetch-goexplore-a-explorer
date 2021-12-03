@@ -1,0 +1,12 @@
+{% if status != nil %}
+  <a href="{{ 'statuses__show' | path_for: id: status._id }}">
+    {% if status.name != nil %}
+      {{ status.name | strip_html }}
+    {% else %}
+      {{ status.remote_id | strip_html }}
+    {% endif %}
+  </a>
+  &nbsp;({{ l[order.state] }})
+{% else %}
+  {{ l[order.state] }}
+{% endif %}

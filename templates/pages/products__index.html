@@ -1,0 +1,14 @@
+{% assign filter_options = "sku sku_2 sku_3 name" | split: " " %}
+
+{% include "shared/filter_search" %}
+
+{% assign products_query  = "products" | db_find: query: query, page: params.page, per_page: params.per_page %}
+{% assign products        = products_query.results %}
+{% assign per_page        = products_query.per_page %}
+
+{% include "products" %}
+
+{% assign page            = products_query.page %}
+{% assign pages_count     = products_query.pages_count %}
+
+{% include "shared/pagination" %}

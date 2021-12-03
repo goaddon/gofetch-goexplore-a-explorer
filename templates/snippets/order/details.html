@@ -1,0 +1,52 @@
+<table width="100%">
+  <tbody>
+    <tr class="align-top">
+      <td width="180">
+        <b>{{ l.headers.created_at }}:</b>
+      </td>
+      <td>
+        {% include "order/details/created_at" %}
+      </td>
+    </tr>
+    <tr class="align-top">
+      <td width="180">
+        <b>{{ l.headers.payment_method }}:</b>
+      </td>
+      <td>
+        {% include "order/details/payment_method" %}
+      </td>
+    </tr>
+    <tr class="align-top">
+      <td width="180">
+        <b>{{ l.headers.delivery_method }}:</b>
+      </td>
+      <td>
+        {% include "order/details/delivery_method" %}
+      </td>
+    </tr>
+    <tr class="align-top">
+      <td>
+        <b>{{ l.headers.state }}:</b>
+      </td>
+      <td>
+        {% include "order/details/state" %}
+      </td>
+    </tr>
+    <tr class="align-top">
+      <td width="180">
+        <b>{{ l.headers.email }}:</b>
+      </td>
+      <td>
+        {% include "order/details/email" %}
+      </td>
+    </tr>
+    <tr class="align-top">
+      <td width="180">
+        <b>{{ l.headers.price }}:</b>
+      </td>
+      <td>
+        {% include "order/details/price" %}
+      </td>
+    </tr>
+  </tbody>
+</table>

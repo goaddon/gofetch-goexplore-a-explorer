@@ -1,0 +1,11 @@
+{% if order.created_at == nil %}
+  <span title="{{ l.initialized_at_1 }} {{ order.initialized_at | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}{{ l.initialized_at_2 }}">
+    {{ l.payment_pending }}
+  </span>
+{% else %}
+  <span title="{{ order.created_at | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}">
+    {% assign days_since_order   = order.created_at | in_time_zone | days_between_dates: today %}
+    {% assign time_ago           = days_since_order | days_to_years_months_days %}
+    {% include "orders/shared/time_ago" %}
+  </span>
+{% endif %}

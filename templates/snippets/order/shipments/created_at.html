@@ -1,0 +1,19 @@
+{{ shipment.created_at | in_time_zone | i18n_l: 'wday_date' | capitalize }}
+{% assign address   = "" %}
+{% assign document  = shipment %}
+<table class="text-secondary">
+  <tbody>
+    {% if document.name != nil or document.first_name != nil or document.last_name != nil or document.company != nil %}
+      <tr><td>{% include "order/addresses/name" %}</td></tr>
+    {% endif %}
+    {% if document.address_1 != nil %}
+      <tr><td>{% include "order/addresses/address_1" %}</td></tr>
+    {% endif %}
+    {% if document.address_2 != nil %}
+      <tr><td>{{ document.address_2 | decrypt | strip_html }}</td></tr>
+    {% endif %}
+    {% if document.zip_code != nil or document.city != nil or document.province != nil or document.country_id != nil %}
+      <tr><td>{% include "order/addresses/zip_code_city_province_country" %}</td></tr>
+    {% endif %}
+  </tbody>
+</table>

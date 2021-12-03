@@ -1,0 +1,16 @@
+{
+  "payment_methods": {
+    "klass": "payment_methods",
+    "query": {
+      "company_id": "{{ company_id }}"
+    },
+    "projection": {
+      "_id": 1,
+      "name": 1,
+      "webshop_id": 1
+    },
+    "sort": {
+      "name": 1
+    }
+  }
+}
