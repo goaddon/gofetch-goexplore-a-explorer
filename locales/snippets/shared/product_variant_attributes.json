@@ -29,6 +29,7 @@
       "path": "Path",
       "weight": "Weight",
       "length": "Length",
+      "width": "Width",
       "height": "Height",
       "unboxed_weight": "Unboxed weight",
       "unboxed_length": "Unboxed length",

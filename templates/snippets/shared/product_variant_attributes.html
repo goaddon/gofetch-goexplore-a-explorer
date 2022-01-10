@@ -92,7 +92,7 @@
       {% endif %}
     {% endfor %}
 
-    {% assign fields = "type low_stock_limit weight length height unboxed_weight unboxed_length unboxed_width unboxed_height weight_unit size_unit published_scope status" | split: " " %}
+    {% assign fields = "type low_stock_limit weight length width height unboxed_weight unboxed_length unboxed_width unboxed_height weight_unit size_unit published_scope status" | split: " " %}
 
     {% for field in fields %}
       {% if document[field] != nil %}
