@@ -11,13 +11,18 @@
   {% assign stock_message_ids = "" %}
   {% for variant in variants %}
     {% if variant.stock_message_id != nil %}
-      {% capture stock_message_ids %}{{ stock_message_ids }} {{ variant.stock_message_ids }}{% endcapture %}
+      {% capture stock_message_ids %}{{ stock_message_ids }} {{ variant.stock_message_id }}{% endcapture %}
     {% endif %}
   {% endfor %}
 
   {% assign stock_message_ids     = stock_message_ids | strip | split: " " | uniq %}
-  {% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id, _ids: stock_message_ids %}
-  {% assign stock_messages        = stock_messages_query.results | to_hash: "_id" %}
+
+  {% if stock_message_ids.size > 0 %}
+
+    {% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id, _ids: stock_message_ids %}
+    {% assign stock_messages        = stock_messages_query.results | to_hash: "_id" %}
+
+  {% endif %}
 
   {% include "product" %}
 
