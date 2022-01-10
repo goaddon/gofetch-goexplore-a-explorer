@@ -19,6 +19,9 @@
       "stock": 1,
       "stock_message_id": 1,
       "variations": 1
+    },
+    "sort": {
+      "_id": 1
     }
   },
   "webshops": {

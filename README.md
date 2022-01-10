@@ -381,7 +381,8 @@ The explorer queries your MongoDB database for data. In order to avoid unhealthy
     {
       "key": {
         "company_id": 1,
-        "product_id": 1
+        "product_id": 1,
+        "_id": 1
       }
     }
   ]
