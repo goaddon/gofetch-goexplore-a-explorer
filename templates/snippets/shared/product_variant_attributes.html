@@ -28,7 +28,7 @@
       {% endif %}
     {% endfor %}
 
-    {% assign fields = "price offer_price before_price" | split: " " %}
+    {% assign fields = "cost_price price offer_price before_price" | split: " " %}
 
     {% for field in fields %}
       {% if document[field] != nil %}

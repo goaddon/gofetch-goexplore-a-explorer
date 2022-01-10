@@ -11,6 +11,7 @@
       "sku_2": "SKU 2",
       "sku_3": "SKU 3",
       "name": "Name",
+      "cost_price": "Price",
       "price": "Price",
       "offer_price": "Offer price",
       "before_price": "Before price",
