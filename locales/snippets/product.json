@@ -4,7 +4,10 @@
     "no_product_name": "without name",
     "price_delimiter": ",",
     "variant_headers": {
-      "sku": "Variant SKU",
+      "sku": "SKU",
+      "sku_2": "SKU 2",
+      "stock": "Stock",
+      "stock_message": "Stock message",
       "variations": "Variations"
     }
   }

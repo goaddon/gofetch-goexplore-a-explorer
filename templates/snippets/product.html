@@ -37,6 +37,9 @@
     <thead>
       <tr>
         <th class="border-bottom-0">{{ l.variant_headers.sku }}</th>
+        <th class="border-bottom-0">{{ l.variant_headers.sku_2 }}</th>
+        <th class="border-bottom-0">{{ l.variant_headers.stock }}</th>
+        <th class="border-bottom-0">{{ l.variant_headers.stock_message }}</th>
         <th class="border-bottom-0">{{ l.variant_headers.variations }}</th>
       </tr>
     </thead>
@@ -44,6 +47,9 @@
       {% for variant in variants %}
         <tr>
           <td>{% include "product/variants/sku" %}</td>
+          <td>{% include "product/variants/sku_2" %}</td>
+          <td>{% include "product/variants/stock" %}</td>
+          <td>{% include "product/variants/stock_message" %}</td>
           <td>{% include "product/variants/variations" %}</td>
         </tr>
       {% endfor %}

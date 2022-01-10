@@ -1,0 +1,10 @@
+{% if variant.stock_message_id != nil %}
+
+  {% assign stock_message_id = variant.stock_message_id %}
+
+  {% if stock_messages[stock_message_id] != nil %}
+
+    {{ stock_messages[stock_message_id].name | strip_html }}
+
+  {% endif %}
+{% endif %}

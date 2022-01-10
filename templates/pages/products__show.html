@@ -17,7 +17,7 @@
 
   {% assign stock_message_ids     = stock_message_ids | strip | split: " " | uniq %}
   {% assign stock_messages_query  = "stock_messages" | db_find: company_id: account._id, _ids: stock_message_ids %}
-  {% assign stock_messages        = stock_messages_query.results %}
+  {% assign stock_messages        = stock_messages_query.results | to_hash: "_id" %}
 
   {% include "product" %}
 

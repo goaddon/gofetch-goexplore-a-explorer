@@ -15,12 +15,10 @@
     "projection": {
       "_id": 1,
       "sku": 1,
-      "variations": 1,
+      "sku_2": 1,
       "stock": 1,
-      "stock_message_id": 1
-    },
-    "sort": {
-      "_id": 1
+      "stock_message_id": 1,
+      "variations": 1
     }
   },
   "webshops": {
