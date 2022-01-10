@@ -4,7 +4,9 @@
 
   {% if stock_messages[stock_message_id] != nil %}
 
-    {{ stock_messages[stock_message_id].name | strip_html }}
+    <a href="{{ 'stock_messages__show' | path_for: id: stock_message_id }}">
+      {{ stock_messages[stock_message_id].name | strip_html }}
+    </a>
 
   {% endif %}
 {% endif %}
