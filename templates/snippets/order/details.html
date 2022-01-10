@@ -40,6 +40,18 @@
         {% include "order/details/email" %}
       </td>
     </tr>
+
+    {% if {% if order.discount_amount != nil %} %}
+      <tr class="align-top">
+        <td width="180">
+          <b>{{ l.headers.discount_amount }}:</b>
+        </td>
+        <td>
+          {% include "order/details/discount_amount" %}
+        </td>
+      </tr>
+    {% endif %}
+
     <tr class="align-top">
       <td width="180">
         <b>{{ l.headers.price }}:</b>

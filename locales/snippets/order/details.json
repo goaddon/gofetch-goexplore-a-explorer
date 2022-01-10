@@ -6,6 +6,7 @@
       "delivery_method": "Delivery",
       "state": "Status",
       "email": "Customer",
+      "discount_amount": "Discount",
       "price": "Price"
     }
   }
