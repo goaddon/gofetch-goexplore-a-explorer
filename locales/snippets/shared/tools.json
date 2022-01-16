@@ -6,6 +6,10 @@
       "payment_methods": "Payment methods",
       "delivery_methods": "Delivery methods",
       "countries": "Countries"
+    },
+    "headers": {
+      "remote_id": "Remote ID",
+      "name": "Name"
     }
   }
 }

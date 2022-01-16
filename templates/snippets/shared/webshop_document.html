@@ -5,16 +5,14 @@
 
 <table class="table">
   <tbody>
-    {% if document.remote_id != nil and document.remote_id != "" %}
-      <tr>
-        <td>
-          <b>{{ l.headers.remote_id }}:</b>
-        </td>
-        <td>
-          {% include "shared/webshop_document/remote_id" %}
-        </td>
-      </tr>
-    {% endif %}
+    <tr>
+      <td>
+        <b>{{ l.headers.remote_id }}:</b>
+      </td>
+      <td>
+        {% include "shared/webshop_document/remote_id" %}
+      </td>
+    </tr>
     <tr>
       <td>
         <b>{{ l.headers.name }}:</b>

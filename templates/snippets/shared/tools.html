@@ -1,12 +1,19 @@
 <h5 class="mb-4">{{ l.headlines[klass] }}</h5>
 {% capture document_path %}{{ klass }}__show{% endcapture %}
-{% for document in documents %}
-  <p>
-    <a href="{{ document_path | path_for: id: document._id }}">
-      {{ document.name }}
-      {% if document.remote_id != nil %}
-        &nbsp;({{ document.remote_id | strip_html }})
-      {% endif %}
-    </a>
-  </p>
-{% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="border-bottom-0 text-nowrap" width="1">{{ l.headers.remote_id }}</th>
+      <th class="border-bottom-0">{{ l.headers.name }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for document in documents %}
+      <tr>
+        <td><a href="{{ document_path | path_for: id: document._id }}">{{ document.remote_id | strip_html }}</a></td>
+        <td>{{ document.name | strip_html }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
