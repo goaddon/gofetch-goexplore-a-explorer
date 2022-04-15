@@ -8,7 +8,7 @@
     {% endif %}
   </a>
   {% if method_price != nil %}
-    &nbsp;({{ method_price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }})
+    ({{ method_price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }})
   {% endif %}
 {% elsif method_price != nil %}
   {{ method_price | round: 2 | replace: ".", l.price_delimiter }} {{ order.currency | strip_html }}

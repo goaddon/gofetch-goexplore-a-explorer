@@ -6,7 +6,7 @@
       {{ status.remote_id | strip_html }}
     {% endif %}
   </a>
-  &nbsp;({{ l[order.state] }})
+  ({{ l[order.state] }})
 {% else %}
   {{ l[order.state] }}
 {% endif %}
