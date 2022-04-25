@@ -13,7 +13,7 @@
       </tr>
     {% endif %}
 
-    {% assign fields = "sku sku_2 sku_3 name meta_title meta_description manufactorer template path campaign" | split: " " %}
+    {% assign fields = "sku sku_2 sku_3 name meta_title meta_description manufacturer template path campaign" | split: " " %}
 
     {% for field in fields %}
       {% if document[field] != nil %}
