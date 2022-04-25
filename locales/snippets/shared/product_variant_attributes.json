@@ -46,7 +46,13 @@
       "offer_finished_at": "Offer end",
       "_id": "Created in database",
       "updated_at": "Updated in database",
-      "barcode": "Barcode"
+      "barcode": "Barcode",
+      "vat_class": "VAT class",
+      "vat_pct": "VAT pct",
+      "min_quantity": "Min. quantity",
+      "max_quantity": "Max. quantity",
+      "in_stock_message": "In stock message",
+      "no_stock_message": "No stock message"
     }
   }
 }
