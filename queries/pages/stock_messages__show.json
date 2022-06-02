@@ -7,7 +7,6 @@
     },
     "projection": {
       "_id": 1,
-      "name": 1,
       "remote_id": 1,
       "webshop_id": 1
     }
