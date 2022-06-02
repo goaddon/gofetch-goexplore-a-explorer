@@ -11,13 +11,7 @@
 
     {% assign order_lines_query     = "order_lines" | db_find: company_id: account._id, variant_id: document._id %}
     {% assign order_lines           = order_lines_query.results %}
-
-    {% assign order_ids = "" %}
-    {% for order_line in order_lines %}
-      {% capture order_ids %}{{ order_ids }} {{ order_line.order_id }}{% endcapture %}
-    {% endfor %}
-    {% assign order_ids             = order_ids | strip | split: " " | uniq %}
-
+    {% assign order_ids             = order_lines | map: "order_id" | uniq %}
     {% assign orders_query          = "orders" | db_find: company_id: account._id, _ids: order_ids %}
     {% assign orders                = orders_query.results %}
 
