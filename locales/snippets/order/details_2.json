@@ -28,7 +28,8 @@
       "updated_at": "Updated in db",
       "closed_at": "Closed in db",
       "cancelled_at": "Cancelled in db",
-      "refunded_at": "Refunded in db"
+      "refunded_at": "Refunded in db",
+      "webshop_id": "Webshop ID"
     },
     "bools": {
       "yes": "Yes",

@@ -23,7 +23,7 @@
           {% endif %}
         {% endfor %}
 
-        {% assign fields = "browser_height_px browser_width_px discount_amount vat_pct cancellation_reason landing_page language ordering_method processing_location processing_method reference referer_page" | split: " " %}
+        {% assign fields = "browser_height_px browser_width_px discount_amount vat_pct cancellation_reason landing_page language ordering_method processing_location processing_method reference referer_page webshop_id" | split: " " %}
 
         {% for field in fields %}
           {% if order[field] != nil and order[field] != "" %}
