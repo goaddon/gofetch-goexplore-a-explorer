@@ -5,7 +5,7 @@
         {% if order.created_at == nil or order.created_at > shipment.created_at %}
           {{ l.impossible_shipment_created_at }}
         {% else %}
-          <span title="{{ shipment.created_at | in_time_zone | i18n_l: 'wday_date' | capitalize }}">
+          <span title="{{ shipment.created_at | in_time_zone | i18n_l: 'wday_date_hours_minutes' | capitalize }}">
             {% assign days_since_shipment = shipment.created_at | in_time_zone | days_between_dates: today %}
             {% assign time_ago            = days_since_shipment | days_to_years_months_days %}
             {% include "orders/shared/time_ago" %}
