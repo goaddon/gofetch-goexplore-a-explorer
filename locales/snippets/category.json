@@ -12,14 +12,14 @@
       "meta_title": "Meta title",
       "meta_description": "Meta description",
       "path": "Path",
-      "parent_remote_id": "Parent remote ID",
       "status": "Status",
       "template": "Template",
       "sort_order": "Sort order",
       "published_scope": "Published scope",
       "breadcrumbs": "Breadcrumbs",
       "published": "Published",
-      "searchable": "Searchable"
+      "searchable": "Searchable",
+      "parent_category": "Parent category"
     }
   }
 }

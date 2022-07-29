@@ -5,7 +5,7 @@
 
 <table class="table">
   <tbody>
-    {% assign fields = "remote_id name meta_title meta_description path parent_remote_id status template sort_order" | split: " " %}
+    {% assign fields = "remote_id name meta_title meta_description path status template sort_order" | split: " " %}
 
     {% for field in fields %}
       {% if category[field] != nil %}
@@ -70,6 +70,19 @@
         </tr>
       {% endif %}
     {% endfor %}
+
+    {% if parent_category != nil %}
+
+      <tr>
+        <td class="pe-3">
+          <b>{{ l.headers.parent_category }}:</b>
+        </td>
+        <td>
+          <a href="{{ 'categories__show' | path_for: id: parent_category._id }}">{{ parent_category.name | decrypt }}</a>
+        </td>
+      </tr>      
+
+    {% endif %}
   </tbody>
 </table>
 

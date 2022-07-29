@@ -6,6 +6,13 @@
   {% assign webshops_query  = "webshops" | db_find: _id: category.webshop_id, company_id: account._id %}
   {% assign webshop         = webshops_query.results.first %}
 
+  {% if category.parent_category_id != nil %}
+
+    {% assign parent_categories_query  = "categories" | db_find: company_id: account._id, _id: category.parent_category_id %}
+    {% assign parent_category          = parent_categories_query.results.first %}
+
+  {% endif %}
+
   {% include "category" %}
 
 {% endif %}
