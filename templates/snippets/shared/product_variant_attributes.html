@@ -148,7 +148,7 @@
 
 {% for description in descriptions %}
   {% if document[description] != nil and document[description] != "" %}
-    <div class="bg-light mt-4 p-2 border rounded">
+    <div class="bg-light my-4 p-2 border rounded">
       {{ document[description] | decrypt | escape }}
     </div>
   {% endif %}
