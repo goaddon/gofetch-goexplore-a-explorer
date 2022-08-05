@@ -2,10 +2,17 @@
 {% assign document         = variants_query.results.first %}
 
 {% if document != nil %}
-  {% assign products_query        = "products" | db_find: company_id: account._id, _id: document.product_id %}
-  {% assign product               = products_query.results.first %}
-  {% assign webshops_query        = "webshops" | db_find: _id: document.webshop_id, company_id: account._id %}
-  {% assign webshop               = webshops_query.results.first %}
+  {% assign products_query  = "products" | db_find: company_id: account._id, _id: document.product_id %}
+  {% assign product         = products_query.results.first %}
+  {% assign webshops_query  = "webshops" | db_find: _id: document.webshop_id, company_id: account._id %}
+  {% assign webshop         = webshops_query.results.first %}
+
+  {% if document.category_ids != nil and document.category_ids.size > 0 %}
+
+    {% assign categories_query  = "categories" | db_find: company_id: account._id, category_ids: document.category_ids %}
+    {% assign categories        = categories_query.results %}
+
+  {% endif %}
 
   {% if document.stock_movements != nil %}
 

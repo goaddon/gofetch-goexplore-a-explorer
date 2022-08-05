@@ -35,6 +35,23 @@
       "relay_id": 1
     }
   },
+  "categories": {
+    "klass": "categories",
+    "query": {
+      "company_id": "{{ company_id }}",
+      "_id": {
+        "$in": "{{ category_ids }}"
+      }
+    },
+    "projection": {
+      "_id": 1,
+      "remote_id": 1,
+      "name": 1
+    },
+    "sort": {
+      "_id": 1
+    }
+  },
   "stock_messages": {
     "klass": "stock_messages",
     "query": {

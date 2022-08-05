@@ -8,6 +8,13 @@
   {% assign webshops_query  = "webshops" | db_find: _id: document.webshop_id, company_id: account._id %}
   {% assign webshop         = webshops_query.results.first %}
 
+  {% if document.category_ids != nil and document.category_ids.size > 0 %}
+
+    {% assign categories_query  = "categories" | db_find: company_id: account._id, category_ids: document.category_ids %}
+    {% assign categories        = categories_query.results %}
+
+  {% endif %}
+
   {% assign stock_message_ids = "" %}
   {% for variant in variants %}
     {% if variant.stock_message_id != nil %}

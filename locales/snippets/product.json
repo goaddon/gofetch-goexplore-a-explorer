@@ -3,6 +3,7 @@
     "headline": "Product",
     "no_product_name": "without name",
     "price_delimiter": ",",
+    "variants": "Variants",
     "variant_headers": {
       "sku": "SKU",
       "sku_2": "SKU 2",

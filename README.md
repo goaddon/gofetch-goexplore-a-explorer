@@ -468,3 +468,19 @@ The explorer queries your MongoDB database for data. In order to avoid unhealthy
   ]
 }
 ```
+
+#### Used by products\__show, variants\__show
+
+```json
+{
+  "klass": "categories",
+  "indexes": [
+    {
+      "key": {
+        "company_id": 1,
+        "_id": 1
+      }
+    }
+  ]
+}
+```

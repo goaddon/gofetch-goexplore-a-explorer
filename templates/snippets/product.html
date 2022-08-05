@@ -1,5 +1,5 @@
 <h5 class="mb-4">
-  {{ l.headline }}&nbsp;
+  {{ l.headline }}
 
   {% if document.name == nil or document.name == "" %}
     {% assign product_name = l.no_product_name %}
@@ -33,6 +33,11 @@
 {% include "shared/product_variant_attributes" %}
 
 {% if variants.size > 0 %}
+
+  <h5 class="mb-4">
+    {{ l.variants }}
+  </h5>
+
   <table class="table mt-4">
     <thead>
       <tr>
@@ -56,3 +61,5 @@
     </tbody>
   </table>
 {% endif %}
+
+{% include "shared/product_variant_categories" %}

@@ -1,0 +1,27 @@
+{% if categories != nil and categories.size > 0 %}
+  
+  <h5 class="mb-4">
+    {{ l.headline }}
+  </h5>
+
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th class="border-bottom-0">{{ l.headers.remote_id }}</th>
+        <th class="border-bottom-0">{{ l.headers.name }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in categories %}
+        <tr>
+          <td>
+            <a href="{{ 'categories__show' | path_for: id: category._id }}">
+              {{ category.remote_id | decrypt | strip_html }}
+            </a>
+          </td>
+          <td>{{ category.name | decrypt | strip_html }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
